@@ -14,9 +14,9 @@ import Jama.Matrix;
 * @author shakthydoss
 */
 public class TDM {
-    public static  ArrayList&lt;String&gt; keywordList = new  ArrayList&lt;String&gt;();
-    public static  ArrayList&lt;String&gt; keywordDoc = new  ArrayList&lt;String&gt;();
-    public static  ArrayList&lt;String&gt; key_back = new  ArrayList&lt;String&gt;();
+    public static  ArrayList<String> keywordList = new  ArrayList<String>();
+    public static  ArrayList<String> keywordDoc = new  ArrayList<String>();
+    public static  ArrayList<String> key_back = new  ArrayList<String>();
     
     public static  double[][] count1;
     public static  int lines=0;
@@ -56,12 +56,9 @@ public class TDM {
                 // System.out.println(t);
                 if(swl.stopwords.contains(t.toLowerCase()))
                 {
-                    
-                    /*System.out.println("Stopword "+t); */
                 }
                 else
                 {
-                    
                     t = stem.DoSuffixStremmer(t);
                     // put the stemmer here
                     if(keywordList.contains(t.toLowerCase())==false) //checking in keyword_array
@@ -72,7 +69,6 @@ public class TDM {
                         bw.newLine();
                         // System.out.println("count  "+countKeyword);
                     }
-                    
                 }
             }
         } // while ends
@@ -80,7 +76,6 @@ public class TDM {
         
         key_back.addAll(keywordList);
         bw.close();       
-        
         int   i=0;
         br = new BufferedReader(new FileReader("new_t.tsv"));
         while((s=br.readLine())!=null)
@@ -102,7 +97,7 @@ public class TDM {
             while(st1.hasMoreTokens()){
                 String  t=st1.nextToken();
                 
-                if(swl.stopwords.contains(t.toLowerCase())||t.length()&lt;3)
+                if(swl.stopwords.contains(t.toLowerCase())||t.length()<3)
                 {
                     
                     //System.out.println(temp
@@ -120,9 +115,9 @@ public class TDM {
             keywordList.addAll(keywordDoc);
             
             count1=new double[2][keywordList.size()];
-            for(i=0;i&lt;2;++i)
+            for(i=0;i<2;++i)
             {
-                for(int j=0;j&lt;keywordList.size();++j)
+                for(int j=0;j<keywordList.size();++j)
                 count1[i][j]=0;
             }
             
@@ -130,30 +125,21 @@ public class TDM {
             while(st2.hasMoreTokens()){
                 String  t1=st2.nextToken();
                 
-                if(swl.stopwords.contains(t1.toLowerCase())||t1.length()&lt;3)
+                if(swl.stopwords.contains(t1.toLowerCase())||t1.length()<3)
                 {
                     
                     //System.out.println(temp
                 }
                 else
                 {
-                    
-                    
                     t1 = stem.DoSuffixStremmer(t1);
                     // put the stemmer hereif(keywordList.contains(t)==false) //checking in
                     //keyword_array
                     if(keywordList.contains(t1.toLowerCase())==true)
                     {
-                        
-                        
                         count1[1][keywordList.indexOf(t1.toLowerCase())] = count1[1][keywordList.indexOf(t1.toLowerCase())] + 1;
-                        
-                        
                     }
-                    
-                    
                 }
-                
             }
             br1 = new BufferedReader(new FileReader("i.txt"));
             while((s1=br1.readLine())!=null){
@@ -163,12 +149,9 @@ public class TDM {
                     // System.out.println(t);
                     if(swl.stopwords.contains(t.toLowerCase()))
                     {
-                        
-                        /*System.out.println("Stopword "+t); */
                     }
                     else
                     {
-                        
                         t = stem.DoSuffixStremmer(t);
                         // put the stemmer here
                         if(keywordList.contains(t.toLowerCase())==true) //checking in keyword_array
@@ -176,7 +159,6 @@ public class TDM {
                             count1[0][keywordList.indexOf(t.toLowerCase())] = count1[0][keywordList.indexOf(t.toLowerCase())] + 1;
                             // System.out.println("count  "+countKeyword);
                         }
-                        
                     }
                 }
             }
@@ -188,9 +170,9 @@ public class TDM {
             Matrix lsi_m= lsi.compute_LSI();
             //System.out.println("here"+ lsi_m.getColumnDimension()+" "+lsi_m.getRowDimension());
             PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("lsi.out")));
-            for(i=0;i&lt;lsi_m.getRowDimension();++i)
+            for(i=0;i<lsi_m.getRowDimension();++i)
             {
-                for(int j=0;j&lt;lsi_m.getColumnDimension();++j)
+                for(int j=0;j<lsi_m.getColumnDimension();++j)
                 {
                     out.println(lsi_m.get(i, j));
                 }
@@ -209,8 +191,5 @@ public class TDM {
         
         bw.close();
         o1.close();
-        
-        
-        
     }// main closin
 } // class closing
