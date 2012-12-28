@@ -40,7 +40,7 @@ public class TDM {
         o1.println("Name\t"+"Link\t"+"Similarity with tdidf\t"+"Similarity with lsi\t"+"Description");
 
 
-                   BufferedReader br = new BufferedReader(new FileReader("t.tsv"));
+                   BufferedReader br = new BufferedReader(new FileReader("new_t.tsv"));
 
                     while((s=br.readLine())!=null)
                     {
